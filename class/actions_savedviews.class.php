@@ -256,9 +256,12 @@ class ActionsSavedviews
         if (defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
             $jsonFlags |= JSON_INVALID_UTF8_SUBSTITUTE;
         }
-        echo '<script>window.savedviews_config = ' . json_encode($config, $jsonFlags) . ';</script>';
+        // Nonce for the Content Security Policy (getNonce() exists from Dolibarr 18)
+        $nonceAttr = function_exists('getNonce') ? ' nonce="' . getNonce() . '"' : '';
 
-        echo '<script src="' . dol_buildpath('/savedviews/js/savedviews.js', 1) . '?v=' . $jsVersion . '"></script>';
+        echo '<script' . $nonceAttr . '>window.savedviews_config = ' . json_encode($config, $jsonFlags) . ';</script>';
+
+        echo '<script' . $nonceAttr . ' src="' . dol_buildpath('/savedviews/js/savedviews.js', 1) . '?v=' . $jsVersion . '"></script>';
 
         return 0;
     }

@@ -11,6 +11,7 @@
 - Save, edit and delete use Dolibarr jQuery UI dialogs instead of the browser `prompt()` / `confirm()`.
 - Security: view data is sanitized server-side (relative URL of the same page only, `action` / `confirm` / `token` / `massaction` / `button_*` parameters dropped, size limits), and again in the browser before applying a view, since shared views are applied by other users.
 - Security: write actions are POST only, database errors are logged instead of being returned to the browser, the page configuration is JSON-encoded with the HEX flags.
+- Security: the injected `<script>` tags carry the Content Security Policy nonce (`getNonce()`, Dolibarr >= 18).
 - Unused `queryParams`, `columns` and `columnCheckboxes` are no longer stored.
 - Translations: de_DE, es_ES, it_IT added.
 - ⚠️ **Upgrading from 1.1.x**: disable then re-enable SavedViews to add the `scope` column, the `llx_savedviews_usergroup` table and the `manage` right.
